@@ -6,25 +6,28 @@ namespace negocio
 {
     public static class ConnectionDB
     {
-        private static string host = "127.0.0.1",
-            database = "negocio",
-            userId = "postgres",
-            password = "uca";
+        private static readonly string host = "127.0.0.1";
 
-        private static string sConnection =
+        private static readonly string database = "negocio";
+
+        private static readonly string userId = "postgres";
+
+        private static readonly string password = "uca";
+
+        private static readonly string sConnection =
             $"Server={host};Port=5432;User Id={userId};Password={password};Database={database};";
         //    $"sslmode=Require;Trust Server Certificate=true";
 
         public static DataTable ExecuteQuery(string query)
         {
-            NpgsqlConnection connection = new NpgsqlConnection(sConnection);
-            DataSet ds = new DataSet();
+            var connection = new NpgsqlConnection(sConnection);
+            var ds = new DataSet();
 
             connection.Open();
-            
-            NpgsqlDataAdapter da = new NpgsqlDataAdapter(query, connection);
+
+            var da = new NpgsqlDataAdapter(query, connection);
             da.Fill(ds);
-            
+
             connection.Close();
 
             return ds.Tables[0];
@@ -32,13 +35,13 @@ namespace negocio
 
         public static void ExecuteNonQuery(string act)
         {
-            NpgsqlConnection connection = new NpgsqlConnection(sConnection);
-            
+            var connection = new NpgsqlConnection(sConnection);
+
             connection.Open();
-            
-            NpgsqlCommand command = new NpgsqlCommand(act, connection);
+
+            var command = new NpgsqlCommand(act, connection);
             command.ExecuteNonQuery();
-            
+
             connection.Close();
         }
     }
