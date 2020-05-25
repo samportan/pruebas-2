@@ -71,7 +71,33 @@ namespace negocio
 
         private void button1_Click(object sender, EventArgs e)
         {
-            
+            try
+            {
+                var query = ConnectionDB.ExecuteQuery($"SELECT FROM orders" +
+                                                      $" WHERE username = '{comboBox1.SelectedItem.ToString()}'");
+
+                if (query != null)
+                {
+
+                    var dlo = ConnectionDB.ExecuteQuery($"DELETE FROM orders WHERE" +
+                                                        $" username = '{comboBox1.SelectedItem.ToString()}'");
+
+                    var dlu = ConnectionDB.ExecuteQuery($"DELETE FROM public.user WHERE " +
+                                                        $"username = '{comboBox1.SelectedItem.ToString()}'");
+                }
+                else
+                {
+                    var dlu = ConnectionDB.ExecuteQuery($"DELETE FROM public.user WHERE " +
+                                                        $"username = '{comboBox1.SelectedItem.ToString()}'");
+                }
+
+                MessageBox.Show("Se ha eliminado el usuario");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ha ocurrido un error!");
+            }
+
         }
     }
 }
