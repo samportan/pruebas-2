@@ -11,27 +11,6 @@ namespace negocio
         {
             InitializeComponent();
         }
-        private void adminUser_Load(object sender, EventArgs e)
-        {
-            var usernames = ConnectionDB.ExecuteQuery("SELECT username FROM public.user");
-            var usernamescombo = new List<string>();
-
-            foreach (DataRow dr in usernames.Rows)
-            {
-                usernamescombo.Add(dr[0].ToString());
-            }
-            
-            var usernamescombo2 = new List<string>();
-
-            foreach (DataRow dr in usernames.Rows)
-            {
-                usernamescombo2.Add(dr[0].ToString());
-            }
-
-            comboBox1.DataSource = usernamescombo;
-            comboBox2.DataSource = usernamescombo2;
-        }
-
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -71,29 +50,105 @@ namespace negocio
 
         private void button1_Click(object sender, EventArgs e)
         {
-            try
-            {
-                string query = $"SELECT FROM orders WHERE username = '{comboBox1.SelectedItem.ToString()}'";
-                var x = ConnectionDB.ExecuteQuery(query);
-                var dr = x.Rows[0];
-                var user = Convert.ToString(dr[0]);
-
-                string dlu = $"DELETE FROM public.user WHERE username = '{user}'";
-                    ConnectionDB.ExecuteNonQuery(dlu);
-                
-
-                MessageBox.Show("Se ha eliminado el usuario");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Ha ocurrido un error!");
-            }
-
+            /* if (textBox5.Text.Equals(""))
+             {
+                 MessageBox.Show("Llene todos los campos");
+             }
+             else
+             {
+                 try
+                 {
+                     ConnectionDB.ExecuteQuery($"SELECT FROM orders WHERE username = '{textBox5.Text}'");
+                     ConnectionDB.ExecuteNonQuery($"DELETE FROM public.user WHERE username = '{textBox5.Text}'");
+ 
+ 
+                     MessageBox.Show("Se ha eliminado el usuario");
+                 }
+                 catch (Exception ex)
+                 {
+                     MessageBox.Show("Ha ocurrido un error!");
+                 }
+             }*/
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            
+            if (textBox6.Text.Equals("") ||
+                textBox3.Text.Equals("") ||
+                textBox4.Text.Equals(""))
+            {
+                MessageBox.Show("Llene todos los campos");
+            }
+            else
+            {
+                try
+                {
+                    if (checkBox1.Checked)
+                    {
+                        string up = $"UPDATE public.user SET username = '{textBox3.Text}', " +
+                                    $"password = '{textBox4.Text}', " +
+                                    $"admin = {true} WHERE username = '{textBox6.Text}'";
+                        ConnectionDB.ExecuteNonQuery(up);
+                    }
+                    else
+                    {
+                        string up = $"UPDATE public.user SET username = '{textBox3.Text}', " +
+                                    $"password = '{textBox4.Text}', " +
+                                    $"admin = {false} WHERE username = '{textBox6.Text}'";
+                        ConnectionDB.ExecuteNonQuery(up);
+                    }
+
+                    MessageBox.Show("Se ha modificado el usuario");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("ha ocurrido un error");
+                }
+            }
+        }
+
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            if (textBox9.Text.Equals("") ||
+                textBox13.Text.Equals("") ||
+                textBox14.Text.Equals("") ||
+                textBox8.Text.Equals(""))
+            {
+                MessageBox.Show("Llene todos los campos");
+            }
+            else
+            {
+                try
+                {
+                    var price = Convert.ToDouble(textBox13.Text);
+                    var stock = Convert.ToInt32(textBox14.Text);
+                    ConnectionDB.ExecuteNonQuery($"INSERT INTO public.inventory(\"productName\", description, price, stock)" +
+                                                 $" VALUES('{textBox9.Text}', '{textBox8.Text}', {price}, {stock})");
+                        
+                        MessageBox.Show("Se ha agregado al inventario");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Ha ocurrido un error");
+                }
+            }
+        }
+        
+        private void button7_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var dt = ConnectionDB.ExecuteQuery($"SELECT * FROM public.orders");
+                    
+                dataGridView1.DataSource = dt;
+                MessageBox.Show("Datos obtenidos exitosamente");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ha ocurrido un problema");
+            }
         }
     }
 }
+
