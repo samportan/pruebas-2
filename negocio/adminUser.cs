@@ -73,23 +73,14 @@ namespace negocio
         {
             try
             {
-                var query = ConnectionDB.ExecuteQuery($"SELECT FROM orders" +
-                                                      $" WHERE username = '{comboBox1.SelectedItem.ToString()}'");
+                string query = $"SELECT FROM orders WHERE username = '{comboBox1.SelectedItem.ToString()}'";
+                var x = ConnectionDB.ExecuteQuery(query);
+                var dr = x.Rows[0];
+                var user = Convert.ToString(dr[0]);
 
-                if (query != null)
-                {
-
-                    var dlo = ConnectionDB.ExecuteQuery($"DELETE FROM orders WHERE" +
-                                                        $" username = '{comboBox1.SelectedItem.ToString()}'");
-
-                    var dlu = ConnectionDB.ExecuteQuery($"DELETE FROM public.user WHERE " +
-                                                        $"username = '{comboBox1.SelectedItem.ToString()}'");
-                }
-                else
-                {
-                    var dlu = ConnectionDB.ExecuteQuery($"DELETE FROM public.user WHERE " +
-                                                        $"username = '{comboBox1.SelectedItem.ToString()}'");
-                }
+                string dlu = $"DELETE FROM public.user WHERE username = '{user}'";
+                    ConnectionDB.ExecuteNonQuery(dlu);
+                
 
                 MessageBox.Show("Se ha eliminado el usuario");
             }
@@ -98,6 +89,11 @@ namespace negocio
                 MessageBox.Show("Ha ocurrido un error!");
             }
 
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            
         }
     }
 }
