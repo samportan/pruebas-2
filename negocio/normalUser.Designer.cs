@@ -39,8 +39,8 @@ namespace negocio
             this.lblDescription = new System.Windows.Forms.Label();
             this.lblProductName = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.buttonBuy = new System.Windows.Forms.Button();
-            this.numericUpDown = new System.Windows.Forms.NumericUpDown();
             this.ProductComboBox = new System.Windows.Forms.ComboBox();
             this.labelTotal = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -51,7 +51,6 @@ namespace negocio
             this.orderTab.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize) (this.numericUpDown)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -107,7 +106,6 @@ namespace negocio
             this.lblQuantity.Size = new System.Drawing.Size(75, 22);
             this.lblQuantity.TabIndex = 1;
             this.lblQuantity.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lblQuantity.Click += new System.EventHandler(this.lblQuantity_Click);
             // 
             // label5
             // 
@@ -126,7 +124,6 @@ namespace negocio
             this.lblDescription.Name = "lblDescription";
             this.lblDescription.Size = new System.Drawing.Size(679, 81);
             this.lblDescription.TabIndex = 0;
-            this.lblDescription.Click += new System.EventHandler(this.lblDescription_Click);
             // 
             // lblProductName
             // 
@@ -135,14 +132,13 @@ namespace negocio
             this.lblProductName.Name = "lblProductName";
             this.lblProductName.Size = new System.Drawing.Size(192, 25);
             this.lblProductName.TabIndex = 0;
-            this.lblProductName.Click += new System.EventHandler(this.lblProductName_Click);
             // 
             // groupBox1
             // 
             this.groupBox1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.groupBox1.BackColor = System.Drawing.Color.SlateGray;
+            this.groupBox1.Controls.Add(this.textBox1);
             this.groupBox1.Controls.Add(this.buttonBuy);
-            this.groupBox1.Controls.Add(this.numericUpDown);
             this.groupBox1.Controls.Add(this.ProductComboBox);
             this.groupBox1.Controls.Add(this.labelTotal);
             this.groupBox1.Controls.Add(this.label3);
@@ -157,6 +153,13 @@ namespace negocio
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Datos de Compra";
             // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(309, 88);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(100, 23);
+            this.textBox1.TabIndex = 4;
+            // 
             // buttonBuy
             // 
             this.buttonBuy.BackColor = System.Drawing.Color.Gold;
@@ -168,15 +171,7 @@ namespace negocio
             this.buttonBuy.TabIndex = 3;
             this.buttonBuy.Text = "Comprar";
             this.buttonBuy.UseVisualStyleBackColor = false;
-            // 
-            // numericUpDown
-            // 
-            this.numericUpDown.Location = new System.Drawing.Point(309, 82);
-            this.numericUpDown.Margin = new System.Windows.Forms.Padding(4);
-            this.numericUpDown.Name = "numericUpDown";
-            this.numericUpDown.Size = new System.Drawing.Size(233, 23);
-            this.numericUpDown.TabIndex = 2;
-            this.numericUpDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.buttonBuy.Click += new System.EventHandler(this.buttonBuy_Click);
             // 
             // ProductComboBox
             // 
@@ -260,7 +255,7 @@ namespace negocio
             this.orderTab.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize) (this.numericUpDown)).EndInit();
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
         }
 
@@ -276,10 +271,10 @@ namespace negocio
         private System.Windows.Forms.Label lblDescription;
         private System.Windows.Forms.Label lblProductName;
         private System.Windows.Forms.Label lblQuantity;
-        private System.Windows.Forms.NumericUpDown numericUpDown;
         private System.Windows.Forms.TabPage orderTab;
         private System.Windows.Forms.ComboBox ProductComboBox;
         private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TextBox textBox1;
 
         #endregion
     }
