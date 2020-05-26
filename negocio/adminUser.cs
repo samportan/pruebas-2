@@ -50,7 +50,7 @@ namespace negocio
 
         private void button1_Click(object sender, EventArgs e)
         {
-            /* if (textBox5.Text.Equals(""))
+             if (textBox5.Text.Equals(""))
              {
                  MessageBox.Show("Llene todos los campos");
              }
@@ -68,7 +68,7 @@ namespace negocio
                  {
                      MessageBox.Show("Ha ocurrido un error!");
                  }
-             }*/
+             }
         }
 
         private void button3_Click(object sender, EventArgs e)
