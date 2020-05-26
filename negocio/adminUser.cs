@@ -58,10 +58,18 @@ namespace negocio
              {
                  try
                  {
-                     ConnectionDB.ExecuteQuery($"SELECT FROM orders WHERE username = '{textBox5.Text}'");
+                     var qr = ConnectionDB.ExecuteQuery($"SELECT FROM orders WHERE" +
+                                                        $" username = '{textBox5.Text}'");
+                     if (qr != null)
+                     {
+                         ConnectionDB.ExecuteNonQuery($"DELETE FROM public.orders WHERE" +
+                                                      $" username = '{textBox5.Text}'");
+                         ConnectionDB.ExecuteNonQuery($"DELETE FROM public.user WHERE" +
+                                                      $" username = '{textBox5.Text}'");
+                     }
+                     
                      ConnectionDB.ExecuteNonQuery($"DELETE FROM public.user WHERE username = '{textBox5.Text}'");
- 
- 
+
                      MessageBox.Show("Se ha eliminado el usuario");
                  }
                  catch (Exception ex)
